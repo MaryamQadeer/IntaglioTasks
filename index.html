@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <title>Task#01</title>
+</head>
+
+<body>
+    <div class="wrapper container">
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Name
+            </div>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" aria-label="name">
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Description
+            </div>
+            <div class="col-sm-9">
+                <textarea class="form-control" aria-label="description"></textarea>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Date
+            </div>
+            <div class="col-sm-9">
+                <div class="d-flex flex-row">
+                    <div class="col-sm-6 btn-group btn-group-toggle">
+                        <label class="btn btn-outline-secondary active">
+                            <input type="radio" name="dateOptions" id="specificDt" value="specificDt" checked>
+                            Specific Date
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" name="dateOptions" id="relativeDt" value="relativeDt"> Relative Date
+                        </label>
+                    </div>
+                    <div class="col-sm-6"><input type="text" class="form-control bg-white" aria-label="date" id="date"
+                            placeholder="Select Date..."></div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2 relativeDate" hidden>
+            <div class="col-sm-3">
+                Relative To
+            </div>
+            <div class="col-sm-9">
+                <select class="form-control" name="relativeToSubOptions">
+                    <option value="fiscal">Fiscal Year End Date</option>
+                    <option value="incorporation">Incorporation Date</option>
+                    <option value="registration">Registration Date</option>
+                </select>
+            </div>
+        </div>
+        <div class="row m-2 relativeDate" hidden>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-9">
+                <div class="d-flex flex-row">
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="relativeTo" id="before" value="before"
+                                checked>
+                            <label class="form-check-label" for="before">
+                                Before
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="relativeTo" id="after" value="after">
+                            <label class="form-check-label" for="after">
+                                After
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="relativeTo" id="same" value="same">
+                            <label class="form-check-label" for="same">
+                                Same
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <select class="form-control" name="sameOptions" hidden>
+                            <option value="day" selected>Day</option>
+                            <option value="month">Month</option>
+                            <option value="quarter">Quarter</option>
+                        </select>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input form-control" type="number" min="1" max="100"
+                                name="relativeToCount" id="countOfTime">
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <select class="form-control" name="timeCount">
+                            <option value="hours" selected>Hours</option>
+                            <option value="days">Days</option>
+                            <option value="weeks">Weeks</option>
+                            <option value="months">Months</option>
+                            <option value="quarters">Quarters</option>
+                            <option value="years">Years</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2 relativeDate relativeDateWM" hidden>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-9">
+                <div class="d-flex flex-row">
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="relSpecificDate" id="relSpecificDate"
+                                value="relSpecificDate">
+                            <label class="form-check-label" for="relSpecificDate">
+                                Specific Date
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2 relativeDate relativeDateWM" hidden>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-9">
+                <div class="d-flex flex-row">
+                    <div class="p-2 quarters" hidden>
+                        <div class="form-check-inline">
+                            <select id="inputState" class="form-control" name="specificDtDayMonthValue">
+                                <option value="first" selected>First</option>
+                                <option value="second">Second</option>
+                                <option value="third">Third</option>
+                            </select>
+                            <label class="form-check-label px-3" for="specificDtDayMonthValue">
+                                Month
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <select id="inputState" class="form-control" name="specificDtDayValue">
+                                <option selected disabled>Please Select</option>
+                            </select>
+                            <label class="form-check-label px-3" for="specificDtDayValue">
+                                Day
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Recurrence
+            </div>
+            <div class="col-sm-9">
+                <div class="d-flex flex-row">
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="recurrence" id="once" value="once"
+                                checked>
+                            <label class="form-check-label" for="once">
+                                Once
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="recurrence" id="recurring"
+                                value="recurring">
+                            <label class="form-check-label" for="recurring">
+                                Recurring
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2" id="frequencySub" hidden>
+            <div class="col-sm-3">
+                Frequency
+            </div>
+            <div class="col-sm-9">
+                <select class="form-control" name="frequency">
+                    <option value="anually">Annually</option>
+                    <option value="biennially">Biennially</option>
+                    <option value="oddYear">Every Odd Year</option>
+                    <option value="evenYear">Every Even Year</option>
+                    <option value="fiveYear">Every Five Years</option>
+                    <option value="tenYear">Every Ten Years</option>
+                </select>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Notify By
+            </div>
+            <div class="col-sm-4">
+                <select class="form-control js-basic-multiple" width="50%" name="notifyBy" multiple>
+                    <option value="email" selected>Email</option>
+                    <option value="dashboard" selected>Dashboard</option>
+                </select>
+            </div>
+            <div class="col-sm-5"></div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Customer group by
+            </div>
+            <div class="col-sm-9">
+                <div class="d-flex flex-row">
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <select class="form-control" name="customerGroupBy">
+                                <option value="all">All</option>
+                                <option value="states">States</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-2" id="customerGroupByState" hidden>
+                        <div class="form-check-inline">
+                            <label for="inputState" class="px-2">State</label>
+                            <select class="form-control js-basic-multiple" style="width: 400px;" name="state" multiple>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Notify about
+            </div>
+            <div class="col-sm-9">
+                <div class="d-flex flex-row">
+                    <div class="p-2">
+                        <div class="form-check-inline">
+                            <select id="inputState" class="form-control">
+                                <option>Tax Submission</option>
+                                <option>Document Upload</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Email template
+            </div>
+            <div class="col-sm-9">
+                <input id="x" type="hidden" name="content">
+                <trix-editor input="x" placeholder="This content will be send as email to Customers..."></trix-editor>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                Dashboard
+            </div>
+            <div class="col-sm-9">
+                <input id="x" type="hidden" name="content">
+                <trix-editor input="x" placeholder="This content will be displayed in the customer dashboard...">
+                </trix-editor>
+            </div>
+        </div>
+        <div class="row m-2 justify-content-between">
+            <div class="col-sm-3">
+                Reminders
+            </div>
+            <div class="col-sm-9">
+                <button type="button" class="float-right btn btn-secondary btn-sm" id="addReminder">Add
+                    Remainder</button>
+            </div>
+        </div>
+        <div class="row m-2 justify-content-between">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-9" id="myReminders">
+                <!-- Here reminder rows will be added -->
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-sm-9">
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.4/trix.min.css"
+        integrity="sha512-sC2S9lQxuqpjeJeom8VeDu/jUJrVfJM7pJJVuH9bqrZZYqGe7VhTASUb3doXVk6WtjD0O4DTS+xBx2Zpr1vRvg=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.4/trix.min.js"
+        integrity="sha512-8iE6dgykdask8wKpgxYbLCJMwoXudIVsYbzVk8qD7OUiaBzFLtfpmT5N6L5E1uT3j2Qjz2ynZCfDdrmAJzMkVg=="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./script.js"></script>
+    <script>
+        // For multiple selection, select2 JS part
+        $(document).ready(function () {
+            $('.js-basic-multiple').select2({
+                theme: "classic",
+                width: "resolve",
+                minimumResultsForSearch: Infinity // to hide search bar
+            });
+            // $('.js-example-basic-single').select2({
+            //     width: "resolve",
+            //     minimumResultsForSearch: Infinity // to hide search bar
+            // });
+        });
+    </script>
+    <style>
+        body {
+            width: 100vw;
+            min-height: 100vh;
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            line-height: 2;
+            background: #ffc600;
+        }
+
+        .wrapper {
+            width: 1024px;
+            /* height: 80vh; */
+            padding: 20px;
+            border: 1px solid black;
+            background: white;
+            display: grid;
+            grid-template-rows: 1fr auto;
+        }
+    </style>
+</body>
+
+</html>
