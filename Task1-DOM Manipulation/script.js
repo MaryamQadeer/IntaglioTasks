@@ -192,6 +192,7 @@ sameOptions.addEventListener('change',toggleSameOptionFields);
 radiosBAS.forEach(option => {
     option.addEventListener('change', (e)=>{
         const elem = e.target;
+        hideWeeknMonths();
         if(elem.value === 'before' || elem.value === 'after'){
             toggleFieldsDisplay(false);
             return;
